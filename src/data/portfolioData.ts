@@ -132,3 +132,9 @@ export const CONTACT_INFO = {
   phone: '+91 7995341715',
   email: 'siddarthareddy380@gmail.com',
 };
+
+export const RESUME_ASSETS = {
+  imageSrc: '/assets/aistudio/WhatsApp_Image_2026-11-12_at_5.43.31_PM_e8bb6074.jpeg',
+  pdfSrc: '/assets/aistudio/Siddartha_Reddy_Resume._415cc9f8.pdf',
+  downloadFilename: 'Siddartha_Reddy_Resume.pdf',
+} as const;

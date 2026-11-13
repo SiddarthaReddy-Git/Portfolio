@@ -9,6 +9,7 @@ import { ScrollVideoStage } from './components/ScrollVideoStage';
 import { SlideSection } from './components/SlideSection';
 import { SlideNavDots } from './components/SlideNavDots';
 import { Footer } from './components/Footer';
+import { ResumeModal } from './components/ResumeModal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -17,6 +18,7 @@ export default function App() {
   const [activeSectionId, setActiveSectionId] = useState<string>('intro-video');
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
+  const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
 
   const navigateToSection = useCallback((sectionId: string) => {
     const target = document.getElementById(sectionId);
@@ -130,6 +132,7 @@ export default function App() {
         activeSectionId={activeSectionId}
         scrollProgress={scrollProgress}
         onNavigate={navigateToSection}
+        onOpenResume={() => setIsResumeOpen(true)}
       />
 
       <SlideNavDots
@@ -149,6 +152,11 @@ export default function App() {
 
       {/* SECTION 8: Minimal footer */}
       <Footer onBackToTop={handleBackToTop} />
+
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
 
       {/* Floating Back-to-Top button */}
       <button

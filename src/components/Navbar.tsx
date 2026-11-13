@@ -5,6 +5,7 @@ interface NavbarProps {
   activeSectionId: string;
   scrollProgress: number;
   onNavigate: (sectionId: string) => void;
+  onOpenResume: () => void;
 }
 
 const TOP_LINKS = [
@@ -15,12 +16,22 @@ const TOP_LINKS = [
   { id: 'education-slide', label: 'Education' },
 ];
 
-export function Navbar({ activeSectionId, scrollProgress, onNavigate }: NavbarProps) {
+export function Navbar({
+  activeSectionId,
+  scrollProgress,
+  onNavigate,
+  onOpenResume,
+}: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleNavClick = (id: string) => {
     setMobileMenuOpen(false);
     onNavigate(id);
+  };
+
+  const handleResumeClick = () => {
+    setMobileMenuOpen(false);
+    onOpenResume();
   };
 
   return (
@@ -42,7 +53,7 @@ export function Navbar({ activeSectionId, scrollProgress, onNavigate }: NavbarPr
           Siddartha Reddy
         </button>
 
-        {/* Zone 2: 5 concise single-line navigation links */}
+        {/* Zone 2: Concise single-line navigation links + Resume */}
         <nav
           aria-label="Portfolio sections"
           className="hidden md:flex items-center gap-6 text-sm font-medium text-[#5d4a75]"
@@ -70,6 +81,14 @@ export function Navbar({ activeSectionId, scrollProgress, onNavigate }: NavbarPr
               </button>
             );
           })}
+
+          <button
+            type="button"
+            onClick={handleResumeClick}
+            className="relative py-1 whitespace-nowrap shrink-0 cursor-pointer text-[#5d4a75] hover:text-[#4c0b7b] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8e24aa] rounded-sm"
+          >
+            Resume
+          </button>
         </nav>
 
         {/* Zone 3: 1 primary action + mobile menu trigger */}
@@ -123,6 +142,14 @@ export function Navbar({ activeSectionId, scrollProgress, onNavigate }: NavbarPr
               {item.label}
             </button>
           ))}
+
+          <button
+            type="button"
+            onClick={handleResumeClick}
+            className="w-full text-left px-3 min-h-[44px] rounded-lg text-sm font-semibold text-[#4c0b7b] bg-[#f7f3ff]/80 hover:bg-[#f7f3ff] transition-colors cursor-pointer"
+          >
+            Resume (View & Download PDF)
+          </button>
         </nav>
       )}
     </header>
