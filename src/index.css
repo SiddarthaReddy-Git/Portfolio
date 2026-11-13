@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-ink-primary: #4c0b7b;
+    --color-ink-secondary: #2b1b3d;
+    --color-ink-muted: #5d4a75;
+    --color-accent-violet: #8e24aa;
+    --color-surface-canvas: #ffffff;
+    --color-surface-lavender: #f7f3ff;
+    --color-border-lavender: rgba(139, 92, 246, 0.16);
+  }
+
+  html {
+    background-color: var(--color-surface-canvas);
+    color: var(--color-ink-secondary);
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-surface-canvas);
+    overflow-x: clip;
+  }
+}
+
+.font-editorial {
+  font-family: "Lora", Georgia, serif;
+}
+
+/* Matches the subtle lavender grid-paper texture of the original portfolio slides */
+.bg-lavender-grid {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to right, rgba(142, 36, 170, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(142, 36, 170, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-lavender-grid-soft {
+  background-color: #fbf9ff;
+  background-image:
+    linear-gradient(to right, rgba(142, 36, 170, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(142, 36, 170, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Strict image preservation: never crop, filter, tint, or distort */
+.portfolio-slide-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-parallax {
+    transform: none !important;
+  }
+}
