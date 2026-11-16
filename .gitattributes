@@ -1,8 +1,9 @@
-# Force GitHub to count all Python files (overrides generated/data heuristics)
+# 1. Force GitHub to count all Python files
 *.py -linguist-generated
 portfolio_py/** -linguist-generated
 tests/** -linguist-generated
 
-# Optional: Uncomment the lines below if your Python files are smaller than 15.3 KB
-# src/data/** linguist-generated
-# src/components/ui/** linguist-vendored
+# 2. Exclude static data and secondary UI components from skewing the bar
+src/data/** linguist-generated
+src/components/ParallaxBackdrop.tsx linguist-generated
+src/components/SlideNavDots.tsx linguist-generated
