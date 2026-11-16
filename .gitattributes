@@ -1,0 +1,8 @@
+# Ensure GitHub Linguist accurately indexes Python and TypeScript source files
+*.py linguist-detectable=true
+*.py linguist-vendored=false
+*.py linguist-generated=false
+
+# Exclude build artifacts and static media assets from language statistics
+dist/** linguist-vendored
+public/assets/** linguist-vendored
