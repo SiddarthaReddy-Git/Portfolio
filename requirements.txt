@@ -1,0 +1,2 @@
+# Uses Python 3.10+ standard library modules only (no external pip packages required).
+# System requirement: ffmpeg / ffprobe for video frame extraction and media probing.
