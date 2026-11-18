@@ -1,0 +1,8 @@
+{
+  "name": "Siddartha Reddy — Portfolio",
+  "description": "Personal portfolio of Siddartha Reddy featuring a scroll-driven introduction, project showcase, resume viewer, and integrated client enquiry form with automated email notifications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
