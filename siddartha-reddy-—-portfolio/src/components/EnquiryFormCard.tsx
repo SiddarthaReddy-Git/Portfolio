@@ -86,25 +86,42 @@ export function EnquiryFormCard({ onClose, headingId }: EnquiryFormCardProps) {
         message: values.message.trim(),
       };
 
-      const response = await fetch('/api/enquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(trimmedPayload),
-      });
+      let payload: EnquiryResponse;
+      try {
+        const response = await fetch('/api/enquiries', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(trimmedPayload),
+        });
 
-      const payload = (await response.json()) as EnquiryResponse;
-
-      if (!response.ok || !payload.success) {
-        if (payload.fieldErrors) {
-          setErrors((prev) => ({
-            ...prev,
-            ...(payload.fieldErrors as EnquiryErrors),
-          }));
+        const parsed = (await response.json().catch(() => null)) as EnquiryResponse | null;
+        if (!parsed) {
+          payload = {
+            success: true,
+            deliveryStatus: 'saved_pending_provider',
+            recipientEmail: 'siddarthareddy380@gmail.com',
+          };
+        } else {
+          payload = parsed;
+          if (!response.ok || !payload.success) {
+            if (payload.fieldErrors) {
+              setErrors((prev) => ({
+                ...prev,
+                ...(payload.fieldErrors as EnquiryErrors),
+              }));
+            }
+            setServerError(
+              payload.error || 'Unable to send your enquiry right now. Please try again.'
+            );
+            return;
+          }
         }
-        setServerError(
-          payload.error || 'Unable to send your enquiry right now. Please try again.'
-        );
-        return;
+      } catch {
+        payload = {
+          success: true,
+          deliveryStatus: 'saved_pending_provider',
+          recipientEmail: 'siddarthareddy380@gmail.com',
+        };
       }
 
       let finalResult: EnquiryResponse = payload;
@@ -112,9 +129,13 @@ export function EnquiryFormCard({ onClose, headingId }: EnquiryFormCardProps) {
       // If no server SMTP/Resend key is configured, dispatch directly to siddarthareddy380@gmail.com via FormSubmit AJAX
       if (payload.deliveryStatus === 'saved_pending_provider') {
         const targetEmail = payload.recipientEmail || 'siddarthareddy380@gmail.com';
+        const formSubmitTarget =
+          targetEmail === 'siddarthareddy380@gmail.com'
+            ? 'a7cc13b8eff669143b2f0823b66c430a'
+            : encodeURIComponent(targetEmail);
         try {
           const fsResponse = await fetch(
-            `https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`,
+            `https://formsubmit.co/ajax/${formSubmitTarget}`,
             {
               method: 'POST',
               headers: {
