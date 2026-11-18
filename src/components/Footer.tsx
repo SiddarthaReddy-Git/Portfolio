@@ -1,11 +1,12 @@
-import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { CONTACT_INFO } from '../data/portfolioData';
 
 interface FooterProps {
   onBackToTop: () => void;
+  onOpenEnquiry: () => void;
 }
 
-export function Footer({ onBackToTop }: FooterProps) {
+export function Footer({ onBackToTop, onOpenEnquiry }: FooterProps) {
   return (
     <footer
       id="footer-contact"
@@ -50,14 +51,25 @@ export function Footer({ onBackToTop }: FooterProps) {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={onBackToTop}
-          className="inline-flex items-center gap-2 px-5 min-h-[44px] text-sm font-semibold text-[#4c0b7b] bg-white hover:bg-[#f7f3ff] border border-purple-200 rounded-xl shadow-xs transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8e24aa]"
-        >
-          <span>Back to top</span>
-          <ArrowUp className="w-4 h-4" aria-hidden="true" />
-        </button>
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <button
+            type="button"
+            onClick={onOpenEnquiry}
+            className="inline-flex items-center gap-2 px-5 min-h-[44px] text-sm font-semibold text-white bg-[#4c0b7b] hover:bg-[#6a15a8] rounded-xl shadow-xs transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8e24aa]"
+          >
+            <Send className="w-4 h-4" aria-hidden="true" />
+            <span>Send an Enquiry</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={onBackToTop}
+            className="inline-flex items-center gap-2 px-5 min-h-[44px] text-sm font-semibold text-[#4c0b7b] bg-white hover:bg-[#f7f3ff] border border-purple-200 rounded-xl shadow-xs transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8e24aa]"
+          >
+            <span>Back to top</span>
+            <ArrowUp className="w-4 h-4" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </footer>
   );

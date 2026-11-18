@@ -10,6 +10,8 @@ import { SlideSection } from './components/SlideSection';
 import { SlideNavDots } from './components/SlideNavDots';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
+import { EnquiryModal } from './components/EnquiryModal';
+import { EnquirySection } from './components/EnquirySection';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -19,6 +21,7 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState<boolean>(false);
 
   const navigateToSection = useCallback((sectionId: string) => {
     const target = document.getElementById(sectionId);
@@ -133,6 +136,7 @@ export default function App() {
         scrollProgress={scrollProgress}
         onNavigate={navigateToSection}
         onOpenResume={() => setIsResumeOpen(true)}
+        onOpenEnquiry={() => setIsEnquiryOpen(true)}
       />
 
       <SlideNavDots
@@ -148,14 +152,25 @@ export default function App() {
         {PORTFOLIO_SLIDES.map((slide, idx) => (
           <SlideSection key={slide.id} slide={slide} sectionIndex={idx} />
         ))}
+
+        {/* SECTION 8: Direct client enquiry form */}
+        <EnquirySection />
       </main>
 
-      {/* SECTION 8: Minimal footer */}
-      <Footer onBackToTop={handleBackToTop} />
+      {/* SECTION 9: Minimal footer */}
+      <Footer
+        onBackToTop={handleBackToTop}
+        onOpenEnquiry={() => setIsEnquiryOpen(true)}
+      />
 
       <ResumeModal
         isOpen={isResumeOpen}
         onClose={() => setIsResumeOpen(false)}
+      />
+
+      <EnquiryModal
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
       />
 
       {/* Floating Back-to-Top button */}

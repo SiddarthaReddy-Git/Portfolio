@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Mail, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   activeSectionId: string;
   scrollProgress: number;
   onNavigate: (sectionId: string) => void;
   onOpenResume: () => void;
+  onOpenEnquiry: () => void;
 }
 
 const TOP_LINKS = [
@@ -21,6 +22,7 @@ export function Navbar({
   scrollProgress,
   onNavigate,
   onOpenResume,
+  onOpenEnquiry,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -32,6 +34,11 @@ export function Navbar({
   const handleResumeClick = () => {
     setMobileMenuOpen(false);
     onOpenResume();
+  };
+
+  const handleEnquiryClick = () => {
+    setMobileMenuOpen(false);
+    onOpenEnquiry();
   };
 
   return (
@@ -89,6 +96,15 @@ export function Navbar({
           >
             Resume
           </button>
+
+          <button
+            type="button"
+            onClick={handleEnquiryClick}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-[#4c0b7b] bg-[#f7f3ff] hover:bg-[#4c0b7b] hover:text-white border border-purple-300/80 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8e24aa]"
+          >
+            <Mail className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            <span>Enquiry</span>
+          </button>
         </nav>
 
         {/* Zone 3: 1 primary action + mobile menu trigger */}
@@ -127,6 +143,7 @@ export function Navbar({
             { id: 'projects-slide', label: '04 · Projects' },
             { id: 'education-slide', label: '05 · Education' },
             { id: 'achievements-slide', label: '06 · Achievements' },
+            { id: 'enquiry-section', label: '07 · Send an Enquiry' },
             { id: 'footer-contact', label: 'Contact & Top' },
           ].map((item) => (
             <button
@@ -149,6 +166,15 @@ export function Navbar({
             className="w-full text-left px-3 min-h-[44px] rounded-lg text-sm font-semibold text-[#4c0b7b] bg-[#f7f3ff]/80 hover:bg-[#f7f3ff] transition-colors cursor-pointer"
           >
             Resume (View & Download PDF)
+          </button>
+
+          <button
+            type="button"
+            onClick={handleEnquiryClick}
+            className="w-full inline-flex items-center justify-center gap-2 mt-1 px-4 min-h-[44px] rounded-lg text-sm font-semibold text-white bg-[#4c0b7b] hover:bg-[#6a15a8] transition-colors cursor-pointer"
+          >
+            <Mail className="w-4 h-4" aria-hidden="true" />
+            <span>Enquiry</span>
           </button>
         </nav>
       )}
